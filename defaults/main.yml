@@ -1,0 +1,11 @@
+---
+# defaults file for vector
+vector_version: "0.36.1"
+vector_packages: vector
+dummy_logs_type: demo_logs
+dummy_logs_format: syslog
+parse_logs_type: remap
+print_type: console
+message: it's new file
+family_deb: amd64
+family_rpm: x86_64

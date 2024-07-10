@@ -1,0 +1,14 @@
+---
+# handlers file for vector
+- name: Start vector service
+  become: true
+  become_method: su
+  ansible.builtin.service:
+    name: vector
+    state: strated
+- name: Restart vector service
+  become: true
+  become_method: su
+  ansible.builtin.service:
+    name: vector
+    state: restarted

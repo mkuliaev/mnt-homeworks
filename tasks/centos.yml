@@ -1,0 +1,24 @@
+---
+# tasks file for vector
+- name: update
+  become: true
+  become_method: su
+  ansible.builtin.yum:
+    name: '*'
+    state: latest
+- name: Get vector distrib
+  ansible.builtin.get_url:
+    url: "https://packages.timber.io/vector/{{ vector_version }}/vector-{{ vector_version }}-1.x86_64.rpm"
+    dest: "./vector-{{ vector_version }}.rpm"
+- name: Install vector packages
+  become: true
+  become_method: su
+  ansible.builtin.yum:
+    name:
+      - vector-{{ vector_version }}.rpm
+- name: Replace vector.yaml
+  become: true
+  become_method: su
+  template:
+    src: templates/vector.yaml
+    dest: /etc/vector/vector.yaml

@@ -1,0 +1,3 @@
+---
+# vars file for vector
+cfg_path: /etc/vector/vector.yaml

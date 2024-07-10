@@ -1,0 +1,10 @@
+---
+# tasks file for vector
+- name: CentOS
+  ansible.builtin.include_tasks: "centos.yml"
+  when:
+    - ansible_facts['distribution'] == "CentOS"
+- name: Ubuntu
+  ansible.builtin.include_tasks: "ubuntu.yml"
+  when:
+    - ansible_facts['distribution'] == "Ubuntu"
