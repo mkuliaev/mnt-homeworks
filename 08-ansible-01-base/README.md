@@ -61,10 +61,6 @@ kuliaev@ansible1:~/dowl/mnt-homeworks/08-ansible-01-base/playbook$
 ---
   some_fact: "all default fact"
 
-
-
-
-
  ```
 
 3. Воспользуйтесь подготовленным (используется `docker`) или создайте собственное окружение для проведения дальнейших испытаний.
