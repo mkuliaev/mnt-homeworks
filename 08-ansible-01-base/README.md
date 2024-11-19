@@ -6,8 +6,6 @@
 
  ```markdown
  ```bash
-
-
 kuliaev@ansible1:~$ ansible --version
 ansible [core 2.16.3]
   config file = None
