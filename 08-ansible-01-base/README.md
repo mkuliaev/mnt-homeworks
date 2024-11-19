@@ -4,7 +4,7 @@
 
 1. Установите Ansible версии 2.10 или выше.
 
- ```bash
+ ```
  ```
 
 kuliaev@ansible1:~$ ansible --version
