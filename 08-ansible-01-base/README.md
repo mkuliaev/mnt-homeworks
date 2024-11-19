@@ -56,7 +56,11 @@ kuliaev@ansible1:~/dowl/mnt-homeworks/08-ansible-01-base/playbook$
 
 2. Найдите файл с переменными (group_vars), в котором задаётся найденное в первом пункте значение, и поменяйте его на `all default fact`.
 
-```SQL 
+```yml  
+
+---
+  some_fact: "all default fact"
+
 
 
 
