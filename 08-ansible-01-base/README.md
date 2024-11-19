@@ -16,6 +16,7 @@ ansible [core 2.16.3]
   python version = 3.12.3 (main, Sep 11 2024, 14:17:37) [GCC 13.2.0] (/usr/bin/python3)
   jinja version = 3.1.2
   libyaml = True
+  
 ---
 
 2. Создайте свой публичный репозиторий на GitHub с произвольным именем.
