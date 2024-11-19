@@ -65,7 +65,7 @@ kuliaev@ansible1:~/dowl/mnt-homeworks/08-ansible-01-base/playbook$
 
 3. Воспользуйтесь подготовленным (используется `docker`) или создайте собственное окружение для проведения дальнейших испытаний.
 
-```sql
+```docker
 
 kuliaev@ansible1:~/dowl/mnt-homeworks/08-ansible-01-base/playbook$ sudo docker ps -a
 CONTAINER ID   IMAGE                      COMMAND            CREATED              STATUS              PORTS     NAMES
