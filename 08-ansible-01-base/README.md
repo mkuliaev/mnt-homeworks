@@ -28,7 +28,7 @@ ansible [core 2.16.3]
 
 1. Попробуйте запустить playbook на окружении из `test.yml`, зафиксируйте значение, которое имеет факт `some_fact` для указанного хоста при выполнении playbook.
 
-```SQL 
+```yml
 kuliaev@ansible1:~/dowl/mnt-homeworks/08-ansible-01-base/playbook$ ansible-playbook -i inventory/test.yml site.yml
 
 PLAY [Print os facts] *********************************************************************************************************************************************************************************************
