@@ -79,6 +79,34 @@ kuliaev@ansible1:~/dowl/mnt-homeworks/08-ansible-01-base/playbook$
 
 ```SQL 
 
+PLAY [Print os facts] *********************************************************************************************
+
+TASK [Gathering Facts] ********************************************************************************************
+ok: [ubuntu]
+ok: [centos7]
+
+TASK [Print OS] ***************************************************************************************************
+ok: [centos7] => {
+    "msg": "CentOS"
+}
+ok: [ubuntu] => {
+    "msg": "Ubuntu"
+}
+
+TASK [Print fact] *************************************************************************************************
+ok: [centos7] => {
+    "msg": "el"
+}
+ok: [ubuntu] => {
+    "msg": "deb"
+}
+
+PLAY RECAP ********************************************************************************************************
+centos7                    : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+kuliaev@ansible1:~/dowl/mnt-homeworks/08-ansible-01-base/playbook$ 
+
 
 
 
