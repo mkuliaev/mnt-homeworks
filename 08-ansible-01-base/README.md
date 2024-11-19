@@ -65,7 +65,8 @@ kuliaev@ansible1:~/dowl/mnt-homeworks/08-ansible-01-base/playbook$
 
 3. Воспользуйтесь подготовленным (используется `docker`) или создайте собственное окружение для проведения дальнейших испытаний.
 
-```yml
+```sql
+
 kuliaev@ansible1:~/dowl/mnt-homeworks/08-ansible-01-base/playbook$ sudo docker ps -a
 CONTAINER ID   IMAGE                      COMMAND            CREATED              STATUS              PORTS     NAMES
 3bc144773758   pycontribs/ubuntu:latest   "sleep infinity"   52 seconds ago       Up 49 seconds                 ubuntu
