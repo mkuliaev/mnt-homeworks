@@ -4,7 +4,7 @@
 
 1. Установите Ansible версии 2.10 или выше.
 
- ```yml
+ ```go
 
 kuliaev@ansible1:~$ ansible --version
 ansible [core 2.16.3]
