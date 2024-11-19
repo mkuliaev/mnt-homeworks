@@ -4,9 +4,9 @@
 
 1. Установите Ansible версии 2.10 или выше.
 
- ```markdown
+ ```bash
  ```
- 
+
 kuliaev@ansible1:~$ ansible --version
 ansible [core 2.16.3]
   config file = None
