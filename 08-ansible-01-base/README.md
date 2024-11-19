@@ -77,7 +77,7 @@ kuliaev@ansible1:~/dowl/mnt-homeworks/08-ansible-01-base/playbook$
 
 4. Проведите запуск playbook на окружении из `prod.yml`. Зафиксируйте полученные значения `some_fact` для каждого из `managed host`.
 
-```SQL 
+```yml 
 
 PLAY [Print os facts] *********************************************************************************************
 
