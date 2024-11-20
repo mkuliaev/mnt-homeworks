@@ -289,7 +289,7 @@ kuliaev@ansible1:~/dowl/mnt-homeworks/08-ansible-01-base/playbook$
 13. Предоставьте скриншоты результатов запуска команд.
 
 (https://github.com/mkuliaev/mnt-homeworks/tree/MNT-video/08-ansible-01-base/playbook)
-[по ссылке](https://github.com/mkuliaev/mnt-homeworks/tree/MNT-video/08-ansible-01-base/playbook)
+
 
 <details>
 <summary>скриншоты</summary>
