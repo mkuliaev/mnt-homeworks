@@ -8,3 +8,9 @@
       - name: Print fact
         debug:
           msg: "{{ some_fact }}"
+      - name: Fixed value some_fact
+        debug:
+          var: some_fact
+
+
+
