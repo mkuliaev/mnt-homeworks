@@ -170,7 +170,7 @@ kuliaev@ansible1:~/dowl/mnt-homeworks/08-ansible-01-base/playbook$
 
 7. При помощи `ansible-vault` зашифруйте факты в `group_vars/deb` и `group_vars/el` с паролем `netology`.
 
-```Bash 
+```SQL
 kuliaev@ansible1:~/dowl/mnt-homeworks/08-ansible-01-base/playbook$ ansible-vault encrypt group_vars/deb/examp.yml
 New Vault password: 
 Confirm New Vault password: 
