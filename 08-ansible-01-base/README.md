@@ -302,15 +302,14 @@ kuliaev@ansible1:~/dowl/mnt-homeworks/08-ansible-01-base/playbook$
 <details>
 <summary>скриншоты</summary>
 
-![изображения 1](ссылка_на_ваше_изображение)
-![изображения 2](ссылка_на_ваше_изображение)
-![изображения 3](ссылка_на_ваше_изображение)
-![изображения 4](ссылка_на_ваше_изображение)
-![изображения 5](ссылка_на_ваше_изображение)
-![изображения 5](ссылка_на_ваше_изображение)
-![изображения 6](ссылка_на_ваше_изображение)
-![изображения 7](ссылка_на_ваше_изображение)
-![изображения 8](ссылка_на_ваше_изображение)
+![изображения 1](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/08-ansible-01-base/png/1.png)
+![изображения 2](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/08-ansible-01-base/png/2.png)
+![изображения 3](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/08-ansible-01-base/png/3.png)
+![изображения 4](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/08-ansible-01-base/png/4.png)
+![изображения 5](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/08-ansible-01-base/png/5.png)
+![изображения 6](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/08-ansible-01-base/png/6.png)
+![изображения 7](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/08-ansible-01-base/png/7.png)
+![изображения 8](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/08-ansible-01-base/png/8.png)
 
 </details>
 
