@@ -125,7 +125,7 @@ kuliaev@ansible1:~/dowl/mnt-homeworks/08-ansible-01-base/playbook$
 
 6.  Повторите запуск playbook на окружении `prod.yml`. Убедитесь, что выдаются корректные значения для всех хостов.
 
-```SQL 
+```YML 
 kuliaev@ansible1:~/dowl/mnt-homeworks/08-ansible-01-base/playbook$ sudo ansible-playbook -i inventory/prod.yml site.yml
 
 PLAY [Print os facts] *******************************************************************************************************************
