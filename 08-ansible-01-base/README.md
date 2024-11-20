@@ -123,17 +123,46 @@ kuliaev@ansible1:~/dowl/mnt-homeworks/08-ansible-01-base/playbook$
 
 5. Добавьте факты в `group_vars` каждой из групп хостов так, чтобы для `some_fact` получились значения: для `deb` — `deb default fact`, для `el` — `el default fact`.
 
-```SQL 
-
-
-
-
- ```
-
 6.  Повторите запуск playbook на окружении `prod.yml`. Убедитесь, что выдаются корректные значения для всех хостов.
 
 ```SQL 
+kuliaev@ansible1:~/dowl/mnt-homeworks/08-ansible-01-base/playbook$ sudo ansible-playbook -i inventory/prod.yml site.yml
 
+PLAY [Print os facts] *******************************************************************************************************************
+
+TASK [Gathering Facts] ******************************************************************************************************************
+ok: [centos7]
+ok: [ubuntu]
+
+TASK [Print OS] *************************************************************************************************************************
+ok: [centos7] => {
+    "msg": "CentOS"
+}
+ok: [ubuntu] => {
+    "msg": "Ubuntu"
+}
+
+TASK [Print fact] ***********************************************************************************************************************
+ok: [centos7] => {
+    "msg": "el default fact"
+}
+ok: [ubuntu] => {
+    "msg": "deb default fact"
+}
+
+TASK [Fixed value some_fact] ************************************************************************************************************
+ok: [centos7] => {
+    "some_fact": "el default fact"
+}
+ok: [ubuntu] => {
+    "some_fact": "deb default fact"
+}
+
+PLAY RECAP ******************************************************************************************************************************
+centos7                    : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+ubuntu                     : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+kuliaev@ansible1:~/dowl/mnt-homeworks/08-ansible-01-base/playbook$
 
 
 
