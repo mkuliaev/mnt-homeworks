@@ -7,6 +7,15 @@
 3. Скачайте [Playbook](./playbook/) из репозитория с домашним заданием и перенесите его в свой репозиторий.
 4. Подготовьте хосты в соответствии с группами из предподготовленного playbook.
 
+
+ ```javascript
+kuliaev@ansible2:~/dowl/mnt-homeworks/08-ansible-02-playbook$ docker ps -a
+CONTAINER ID   IMAGE                           COMMAND             CREATED          STATUS          PORTS                          NAMES
+7dc937a2fb64   timberio/vector:0.28.1-debian   "/usr/bin/vector"   37 seconds ago   Up 34 seconds                                  vector
+41fcb43d74d2   clickhouse/clickhouse-server    "/entrypoint.sh"    24 minutes ago   Up 24 minutes   8123/tcp, 9000/tcp, 9009/tcp   clickhouse-server
+kuliaev@ansible2:~/dowl/mnt-homeworks/08-ansible-02-playbook$ 
+ ```
+
 ## Основная часть
 
 1. Подготовьте свой inventory-файл `prod.yml`.
