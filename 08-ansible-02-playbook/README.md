@@ -335,18 +335,55 @@ kuliaev@ansible02:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ docker-c
 
   ```
   ```Bash
+kuliaev@ansible02:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ ansible-playbook -i inventory/prod.yml site.yml --check
+
+PLAY [Install Clickhouse] *************************************************************************************************************************************
+
+TASK [Gathering Facts] ****************************************************************************************************************************************
+[WARNING]: Platform linux on host clickhouse-01 is using the discovered Python interpreter at /usr/bin/python3.8, but future installation of another Python
+interpreter could change the meaning of that path. See https://docs.ansible.com/ansible-core/2.12/reference_appendices/interpreter_discovery.html for more
+information.
+ok: [clickhouse-01]
+
+TASK [Get clickhouse distrib] *********************************************************************************************************************************
+changed: [clickhouse-01] => (item=clickhouse-client)
+changed: [clickhouse-01] => (item=clickhouse-server)
+failed: [clickhouse-01] (item=clickhouse-common-static) => {"ansible_loop_var": "item", "changed": false, "dest": "./clickhouse-common-static-22.3.3.44.rpm", "elapsed": 0, "item": "clickhouse-common-static", "msg": "Request failed", "response": "HTTP Error 404: Not Found", "status_code": 404, "url": "https://packages.clickhouse.com/rpm/stable/clickhouse-common-static-22.3.3.44.noarch.rpm"}
+
+TASK [Get clickhouse distrib] *********************************************************************************************************************************
+changed: [clickhouse-01]
+
+TASK [Install clickhouse packages] ****************************************************************************************************************************
+An exception occurred during task execution. To see the full traceback, use -vvv. The error was: OSError: Could not open: clickhouse-common-static-22.3.3.44.rpm clickhouse-client-22.3.3.44.rpm clickhouse-server-22.3.3.44.rpm
+fatal: [clickhouse-01]: FAILED! => {"changed": false, "module_stderr": "Traceback (most recent call last):\n  File \"<stdin>\", line 16, in <module>\n  File \"/usr/lib64/python3.6/runpy.py\", line 205, in run_module\n    return _run_module_code(code, init_globals, run_name, mod_spec)\n  File \"/usr/lib64/python3.6/runpy.py\", line 96, in _run_module_code\n    mod_name, mod_spec, pkg_name, script_name)\n  File \"/usr/lib64/python3.6/runpy.py\", line 85, in _run_code\n    exec(code, run_globals)\n  File \"/tmp/ansible_ansible.legacy.dnf_payload_xl9utsax/ansible_ansible.legacy.dnf_payload.zip/ansible/modules/dnf.py\", line 1427, in <module>\n  File \"/tmp/ansible_ansible.legacy.dnf_payload_xl9utsax/ansible_ansible.legacy.dnf_payload.zip/ansible/modules/dnf.py\", line 1416, in main\n  File \"/tmp/ansible_ansible.legacy.dnf_payload_xl9utsax/ansible_ansible.legacy.dnf_payload.zip/ansible/modules/dnf.py\", line 1390, in run\n  File \"/tmp/ansible_ansible.legacy.dnf_payload_xl9utsax/ansible_ansible.legacy.dnf_payload.zip/ansible/modules/dnf.py\", line 1048, in ensure\n  File \"/tmp/ansible_ansible.legacy.dnf_payload_xl9utsax/ansible_ansible.legacy.dnf_payload.zip/ansible/modules/dnf.py\", line 948, in _install_remote_rpms\n  File \"/usr/lib/python3.6/site-packages/dnf/base.py\", line 1317, in add_remote_rpms\n    raise IOError(_(\"Could not open: {}\").format(' '.join(pkgs_error)))\nOSError: Could not open: clickhouse-common-static-22.3.3.44.rpm clickhouse-client-22.3.3.44.rpm clickhouse-server-22.3.3.44.rpm\n", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 1}
+
+PLAY RECAP ****************************************************************************************************************************************************
+clickhouse-01              : ok=2    changed=1    unreachable=0    failed=1    skipped=0    rescued=1    ignored=0   
+
+kuliaev@ansible02:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ 
 
 
   ```
-
+ошибка - такой версии в репозитории нет - заменяем на одн уиз того что есть  например 23.3.2.1
 
 
  ```Bash
-
+---
+clickhouse_version: "23.3.2.1"
+clickhouse_packages:
+  - clickhouse-client
+  - clickhouse-server
+  - clickhouse-common-static
 
   ```
-  ```Bash
+Совсем забыл про vektor. 
 
+
+  ```Bash
+---
+vector_version: "0.42.0"
+vector_config_dir: "{{ ansible_user_dir }}/vector_config"
+vector_config:
 
   ```
 
