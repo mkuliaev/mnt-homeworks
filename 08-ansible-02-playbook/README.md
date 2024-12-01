@@ -7,15 +7,6 @@
 3. Скачайте [Playbook](./playbook/) из репозитория с домашним заданием и перенесите его в свой репозиторий.
 4. Подготовьте хосты в соответствии с группами из предподготовленного playbook.
 
-
- ```javascript
-kuliaev@ansible2:~/dowl/mnt-homeworks/08-ansible-02-playbook$ docker ps -a
-CONTAINER ID   IMAGE                           COMMAND             CREATED          STATUS          PORTS                          NAMES
-7dc937a2fb64   timberio/vector:0.28.1-debian   "/usr/bin/vector"   37 seconds ago   Up 34 seconds                                  vector
-41fcb43d74d2   clickhouse/clickhouse-server    "/entrypoint.sh"    24 minutes ago   Up 24 minutes   8123/tcp, 9000/tcp, 9009/tcp   clickhouse-server
-kuliaev@ansible2:~/dowl/mnt-homeworks/08-ansible-02-playbook$ 
- ```
-
 ## Основная часть
 
 1. Подготовьте свой inventory-файл `prod.yml`.
@@ -36,3 +27,36 @@ kuliaev@ansible2:~/dowl/mnt-homeworks/08-ansible-02-playbook$
 Выполненное домашнее задание пришлите в виде ссылки на .md-файл в вашем репозитории.
 
 ---
+
+
+ ```javascript
+kuliaev@ansible02:~$ ansible --version
+ansible [core 2.12.10]
+  config file = /etc/ansible/ansible.cfg
+  configured module search path = ['/home/kuliaev/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python3/dist-packages/ansible
+  ansible collection location = /home/kuliaev/.ansible/collections:/usr/share/ansible/collections
+  executable location = /usr/bin/ansible
+  python version = 3.8.10 (default, Nov  7 2024, 13:10:47) [GCC 9.4.0]
+  jinja version = 2.10.1
+  libyaml = True
+
+
+ ```
+```Bash
+kuliaev@ansible02:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ cat Dockerfile 
+FROM rockylinux:8
+
+RUN dnf -y update && \
+    dnf -y install epel-release && \
+    dnf -y install python38 python38-pip && \
+    dnf clean all
+
+RUN alternatives --set python /usr/bin/python3.8 && \
+    ln -s /usr/bin/pip3.8 /usr/bin/pip
+
+CMD ["sleep", "infinity"]
+
+
+
+ ```
