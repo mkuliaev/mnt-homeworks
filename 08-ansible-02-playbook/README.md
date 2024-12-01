@@ -217,27 +217,126 @@ After this operation, 1,230 kB of additional disk space will be used.
   ```
 
 
- ```Bash
+ ```YML
+---
+clickhouse:
+  hosts:
+    clickhouse-01:
+      ansible_connection: docker
+vector:
+  hosts:
+    vector-01:
+      ansible_connection: docker
 
 
-  ```
-
-
- ```Bash
-
-
-  ```
-
-
-
- ```Bash
 
 
   ```
 
 
+ ```Bash
+kuliaev@ansible02:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ ansible-playbook -i inventory/prod.yml site.yml --check
+
+PLAY [Install Clickhouse] *************************************************************************************************************************************
+
+TASK [Gathering Facts] ****************************************************************************************************************************************
+[WARNING]: Platform linux on host clickhouse-01 is using the discovered Python interpreter at /usr/bin/python3.8, but future installation of another Python
+interpreter could change the meaning of that path. See https://docs.ansible.com/ansible-core/2.12/reference_appendices/interpreter_discovery.html for more
+information.
+ok: [clickhouse-01]
+
+TASK [Get clickhouse distrib] *********************************************************************************************************************************
+ok: [clickhouse-01] => (item=clickhouse-client)
+ok: [clickhouse-01] => (item=clickhouse-server)
+failed: [clickhouse-01] (item=clickhouse-common-static) => {"ansible_loop_var": "item", "changed": false, "dest": "./clickhouse-common-static-22.3.3.44.rpm", "elapsed": 0, "gid": 0, "group": "root", "item": "clickhouse-common-static", "mode": "0644", "msg": "Request failed", "owner": "root", "response": "HTTP Error 404: Not Found", "size": 246310036, "state": "file", "status_code": 404, "uid": 0, "url": "https://packages.clickhouse.com/rpm/stable/clickhouse-common-static-22.3.3.44.noarch.rpm"}
+
+TASK [Get clickhouse distrib] *********************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Install clickhouse packages] ****************************************************************************************************************************
+fatal: [clickhouse-01]: FAILED! => {"changed": false, "module_stderr": "/bin/sh: sudo: command not found\n", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 127}
+
+PLAY RECAP ****************************************************************************************************************************************************
+clickhouse-01              : ok=2    changed=0    unreachable=0    failed=1    skipped=0    rescued=1    ignored=0   
+
+kuliaev@ansible02:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ 
+
+
+
+  ```
+
+
 
  ```Bash
+uliaev@ansible02:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ docker-compose down
+WARN[0000] /home/kuliaev/dowl/mnt-homeworks/08-ansible-02-playbook/playbook/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion 
+[+] Running 3/3
+ ✔ Container vector-01      Removed                                                                                                                      10.3s 
+ ✔ Container clickhouse-01  Removed                                                                                                                      10.3s 
+ ✔ Network my_network       Removed                                                                                                                       0.1s 
+k
+
+  ```
+Дописываем в Docker файл - sudo
+
+
+ ```YML
+FROM rockylinux:8
+
+RUN dnf -y update && \
+    dnf -y install epel-release && \
+    dnf -y install python38 python38-pip sudo && \
+    dnf clean all
+
+RUN alternatives --set python /usr/bin/python3.8 && \
+    ln -s /usr/bin/pip3.8 /usr/bin/pip
+
+CMD ["sleep", "infinity"]
+
+
+
+  ```
+Собираем по новой  - без кэша
+
+
+ ```Bash
+
+
+  ```
+  ```Bash
+
+
+  ```
+
+
+
+ ```Bash
+
+
+  ```
+  ```Bash
+
+
+  ```
+
+
+
+ ```Bash
+
+
+  ```
+  ```Bash
+
+
+  ```
+
+
+
+ ```Bash
+
+
+  ```
+  ```Bash
 
 
   ```
