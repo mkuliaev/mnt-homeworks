@@ -296,10 +296,41 @@ CMD ["sleep", "infinity"]
 
 
   ```
-Собираем по новой  - без кэша
+Собираем по новой  - без кэша и запускаем
 
 
  ```Bash
+kuliaev@ansible02:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ nano Dockerfile 
+kuliaev@ansible02:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ docker-compose build --no-cache
+WARN[0000] /home/kuliaev/dowl/mnt-homeworks/08-ansible-02-playbook/playbook/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion 
+[+] Building 0/2s (0/2)                                                                                                                         docker:default
+ ⠇ Service vector      Building                                                                                                                          65.9s 
+ ⠇ Service clickhouse  Building                                                                                                                          65.9s 
+[+] Building 100.1s (12/12) FINISHED                                                                                                            docker:default 
+ => [vector internal] load build definition from Dockerfile                                                                                               0.1s 
+ => => transferring dockerfile: 309B                                                                                                                      0.0s 
+ => [vector internal] load .dockerignore                                                                                                                  0.0s 
+ => => transferring context: 2B                                                                                                                           0.0s 
+ => [clickhouse internal] load build definition from Dockerfile                                                                                           0.1s
+ => => transferring dockerfile: 309B                                                                                                                      0.0s
+ => [clickhouse internal] load .dockerignore                                                                                                              0.1s
+ => => transferring context: 2B                                                                                                                           0.0s 
+ => [clickhouse internal] load metadata for docker.io/library/rockylinux:8                                                                                1.0s 
+ => CACHED [clickhouse 1/3] FROM docker.io/library/rockylinux:8@sha256:9794037624aaa6212aeada1d28861ef5e0a935adaf93e4ef79837119f2a2d04c                   0.0s 
+ => [vector 2/3] RUN dnf -y update &&     dnf -y install epel-release &&     dnf -y install python38 python38-pip sudo &&     dnf clean all              63.1s 
+ => [vector 3/3] RUN alternatives --set python /usr/bin/python3.8 &&     ln -s /usr/bin/pip3.8 /usr/bin/pip                                               2.0s 
+ => [clickhouse] exporting to image                                                                                                                      33.8s 
+ => => exporting layers                                                                                                                                  33.7s 
+ => => writing image sha256:c7ea88fc39a2ae3122d7c7cc1c8c4de839184ad34f2cb36b445764109978b7df                                                              0.0s 
+ => => naming to docker.io/library/playbook-clickhouse                                                                                                    0.0s 
+ => [vector] exporting to image                                                                                                                          33.8s 
+ => => exporting layers                                                                                                                                  33.7s
+ => => writing image sha256:bf2ec89757f2e29730d30dcd9e2ee86b5591ac26912ba097421b77f13cd373d9                                                              0.0s 
+[+] Building 2/2 docker.io/library/playbook-vector                                                                                                        0.0s 
+ ✔ Service vector      Built                                                                                                                            100.2s 
+ ✔ Service clickhouse  Built                                                                                                                            100.2s 
+kuliaev@ansible02:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ docker-compose up -d
+
 
 
   ```
