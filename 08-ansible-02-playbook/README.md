@@ -390,7 +390,7 @@ encoding.codec = "json"
 ```
 
 
- ```YML
+ ```Bash
 kuliaev@ansible2:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ ansible-playbook -i inventory/prod.yml site.yml --check
 
 PLAY [Install Clickhouse] *****************************************************************************************************************************************************************************************
@@ -444,6 +444,55 @@ kuliaev@ansible2:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$
   ```
   
   ```Bash
+kuliaev@ansible2:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ ansible-playbook -i inventory/prod.yml site.yml --diff
+
+PLAY [Install Clickhouse] *****************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ********************************************************************************************************************************************************************************************
+[WARNING]: Platform linux on host clickhouse-01 is using the discovered Python interpreter at /usr/bin/python3.8, but future installation of another Python interpreter could change the meaning of that path. See
+https://docs.ansible.com/ansible-core/2.12/reference_appendices/interpreter_discovery.html for more information.
+ok: [clickhouse-01]
+
+TASK [Get clickhouse distrib] *************************************************************************************************************************************************************************************
+ok: [clickhouse-01] => (item=clickhouse-client)
+ok: [clickhouse-01] => (item=clickhouse-server)
+ok: [clickhouse-01] => (item=clickhouse-common-static)
+
+TASK [Install clickhouse packages] ********************************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Flush handlers to restart clickhouse] ***********************************************************************************************************************************************************************
+
+TASK [Create database] ********************************************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+PLAY [Install vector] *********************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ********************************************************************************************************************************************************************************************
+[WARNING]: Platform linux on host vector-01 is using the discovered Python interpreter at /usr/bin/python3.8, but future installation of another Python interpreter could change the meaning of that path. See
+https://docs.ansible.com/ansible-core/2.12/reference_appendices/interpreter_discovery.html for more information.
+ok: [vector-01]
+
+TASK [Get vector distrib] *****************************************************************************************************************************************************************************************
+ok: [vector-01]
+
+TASK [Install vector packages] ************************************************************************************************************************************************************************************
+ok: [vector-01]
+
+TASK [Flush handlers to restart vector] ***************************************************************************************************************************************************************************
+
+TASK [Configure Vector | ensure what directory exists] ************************************************************************************************************************************************************
+ok: [vector-01]
+
+TASK [Configure Vector | Template config] *************************************************************************************************************************************************************************
+ok: [vector-01]
+
+PLAY RECAP ********************************************************************************************************************************************************************************************************
+clickhouse-01              : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+vector-01                  : ok=5    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+kuliaev@ansible2:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ 
+
 
 
   ```
