@@ -146,7 +146,7 @@ kuliaev@ansible2:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$
 
 
 
- ```Bash
+ ```YML
 - name: Install vector
   hosts: vector
   handlers:
@@ -155,7 +155,6 @@ kuliaev@ansible2:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$
       ansible.builtin.service:
         name: vector
         state: restarted
-
   tasks:
     - name: Get vector distrib
       ansible.builtin.get_url:
@@ -189,14 +188,14 @@ kuliaev@ansible2:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$
 
 
  ```Bash
-kuliaev@ansible02:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ ansible-lint site.yml
+kuliaev@ansible2:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ ansible-lint site.yml
 
 Command 'ansible-lint' not found, but can be installed with:
 
 apt install ansible-lint
 Please ask your administrator.
 
-kuliaev@ansible02:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ sudo apt install ansible-lint
+kuliaev@ansible2:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ sudo apt install ansible-lint
 Reading package lists... Done
 Building dependency tree       
 Reading state information... Done
@@ -211,7 +210,7 @@ After this operation, 1,230 kB of additional disk space will be used.
 
 
   ```
-
+павим prod.yml
 
  ```YML
 ---
@@ -224,14 +223,11 @@ vector:
     vector-01:
       ansible_connection: docker
 
-
-
-
   ```
-
+Проверяем playbook site.yml --check
 
  ```Bash
-kuliaev@ansible02:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ ansible-playbook -i inventory/prod.yml site.yml --check
+kuliaev@ansible2:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ ansible-playbook -i inventory/prod.yml site.yml --check
 
 PLAY [Install Clickhouse] *************************************************************************************************************************************
 
@@ -255,13 +251,10 @@ fatal: [clickhouse-01]: FAILED! => {"changed": false, "module_stderr": "/bin/sh:
 PLAY RECAP ****************************************************************************************************************************************************
 clickhouse-01              : ok=2    changed=0    unreachable=0    failed=1    skipped=0    rescued=1    ignored=0   
 
-kuliaev@ansible02:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ 
-
-
 
   ```
 
-
+Разбираем окружение
 
  ```Bash
 uliaev@ansible02:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ docker-compose down
@@ -327,9 +320,10 @@ WARN[0000] /home/kuliaev/dowl/mnt-homeworks/08-ansible-02-playbook/playbook/dock
  ✔ Service clickhouse  Built                                                                                                                            100.2s 
 kuliaev@ansible02:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ docker-compose up -d
 
-
-
+ 
   ```
+Запускаем site.yml --check повторно
+
   ```Bash
 kuliaev@ansible02:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ ansible-playbook -i inventory/prod.yml site.yml --check
 
@@ -360,12 +354,12 @@ kuliaev@ansible02:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$
 
 
   ```
-ошибка - такой версии в репозитории нет - заменяем на одн уиз того что есть  например 23.3.2.1
+Ошибка - такой версии в репозитории нет - заменяем на одн из того что есть  например 23.5.5.92
 
 
  ```Bash
 ---
-clickhouse_version: "23.3.2.1"
+clickhouse_version: "23.5.5.92"
 clickhouse_packages:
   - clickhouse-client
   - clickhouse-server
@@ -382,33 +376,69 @@ vector_config_dir: "{{ ansible_user_dir }}/vector_config"
 vector_config:
 
   ```
+vector.yml.j2
+
+```Bash
+
+[sources.my_source]
+type = "stdin"
+
+[sinks.my_sink]
+type = "console"
+inputs = ["my_source"]
+encoding.codec = "json"
+```
 
 
+ ```YML
+kuliaev@ansible2:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ ansible-playbook -i inventory/prod.yml site.yml --check
 
- ```Bash
-kuliaev@ansible02:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ ansible-playbook -i inventory/prod.yml site.yml --check
+PLAY [Install Clickhouse] *****************************************************************************************************************************************************************************************
 
-PLAY [Install Clickhouse] *************************************************************************************************************************************
-
-TASK [Gathering Facts] ****************************************************************************************************************************************
-[WARNING]: Platform linux on host clickhouse-01 is using the discovered Python interpreter at /usr/bin/python3.8, but future installation of another Python
-interpreter could change the meaning of that path. See https://docs.ansible.com/ansible-core/2.12/reference_appendices/interpreter_discovery.html for more
-information.
+TASK [Gathering Facts] ********************************************************************************************************************************************************************************************
+[WARNING]: Platform linux on host clickhouse-01 is using the discovered Python interpreter at /usr/bin/python3.8, but future installation of another Python interpreter could change the meaning of that path. See
+https://docs.ansible.com/ansible-core/2.12/reference_appendices/interpreter_discovery.html for more information.
 ok: [clickhouse-01]
 
-TASK [Get clickhouse distrib] *********************************************************************************************************************************
-changed: [clickhouse-01] => (item=clickhouse-client)
-changed: [clickhouse-01] => (item=clickhouse-server)
-changed: [clickhouse-01] => (item=clickhouse-common-static)
+TASK [Get clickhouse distrib] *************************************************************************************************************************************************************************************
+ok: [clickhouse-01] => (item=clickhouse-client)
+ok: [clickhouse-01] => (item=clickhouse-server)
+ok: [clickhouse-01] => (item=clickhouse-common-static)
 
-TASK [Install clickhouse packages] ****************************************************************************************************************************
-An exception occurred during task execution. To see the full traceback, use -vvv. The error was: OSError: Could not open: ./clickhouse-common-static-24.3.12.75.rpm ./clickhouse-client-24.3.12.75.rpm ./clickhouse-server-24.3.12.75.rpm
-fatal: [clickhouse-01]: FAILED! => {"changed": false, "module_stderr": "Traceback (most recent call last):\n  File \"<stdin>\", line 16, in <module>\n  File \"/usr/lib64/python3.6/runpy.py\", line 205, in run_module\n    return _run_module_code(code, init_globals, run_name, mod_spec)\n  File \"/usr/lib64/python3.6/runpy.py\", line 96, in _run_module_code\n    mod_name, mod_spec, pkg_name, script_name)\n  File \"/usr/lib64/python3.6/runpy.py\", line 85, in _run_code\n    exec(code, run_globals)\n  File \"/tmp/ansible_ansible.legacy.dnf_payload_jd6xfhvr/ansible_ansible.legacy.dnf_payload.zip/ansible/modules/dnf.py\", line 1427, in <module>\n  File \"/tmp/ansible_ansible.legacy.dnf_payload_jd6xfhvr/ansible_ansible.legacy.dnf_payload.zip/ansible/modules/dnf.py\", line 1416, in main\n  File \"/tmp/ansible_ansible.legacy.dnf_payload_jd6xfhvr/ansible_ansible.legacy.dnf_payload.zip/ansible/modules/dnf.py\", line 1390, in run\n  File \"/tmp/ansible_ansible.legacy.dnf_payload_jd6xfhvr/ansible_ansible.legacy.dnf_payload.zip/ansible/modules/dnf.py\", line 1048, in ensure\n  File \"/tmp/ansible_ansible.legacy.dnf_payload_jd6xfhvr/ansible_ansible.legacy.dnf_payload.zip/ansible/modules/dnf.py\", line 948, in _install_remote_rpms\n  File \"/usr/lib/python3.6/site-packages/dnf/base.py\", line 1317, in add_remote_rpms\n    raise IOError(_(\"Could not open: {}\").format(' '.join(pkgs_error)))\nOSError: Could not open: ./clickhouse-common-static-24.3.12.75.rpm ./clickhouse-client-24.3.12.75.rpm ./clickhouse-server-24.3.12.75.rpm\n", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 1}
+TASK [Install clickhouse packages] ********************************************************************************************************************************************************************************
+ok: [clickhouse-01]
 
-PLAY RECAP ****************************************************************************************************************************************************
-clickhouse-01              : ok=2    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+TASK [Flush handlers to restart clickhouse] ***********************************************************************************************************************************************************************
 
-kuliaev@ansible02:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ 
+TASK [Create database] ********************************************************************************************************************************************************************************************
+skipping: [clickhouse-01]
+
+PLAY [Install vector] *********************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ********************************************************************************************************************************************************************************************
+[WARNING]: Platform linux on host vector-01 is using the discovered Python interpreter at /usr/bin/python3.8, but future installation of another Python interpreter could change the meaning of that path. See
+https://docs.ansible.com/ansible-core/2.12/reference_appendices/interpreter_discovery.html for more information.
+ok: [vector-01]
+
+TASK [Get vector distrib] *****************************************************************************************************************************************************************************************
+ok: [vector-01]
+
+TASK [Install vector packages] ************************************************************************************************************************************************************************************
+ok: [vector-01]
+
+TASK [Flush handlers to restart vector] ***************************************************************************************************************************************************************************
+
+TASK [Configure Vector | ensure what directory exists] ************************************************************************************************************************************************************
+ok: [vector-01]
+
+TASK [Configure Vector | Template config] *************************************************************************************************************************************************************************
+ok: [vector-01]
+
+PLAY RECAP ********************************************************************************************************************************************************************************************************
+clickhouse-01              : ok=3    changed=0    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+vector-01                  : ok=5    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+kuliaev@ansible2:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ 
 
 
   ```
