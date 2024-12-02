@@ -444,7 +444,7 @@ kuliaev@ansible2:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$
 
 
   ```
-  ![Screnshot](https://github.com/mkuliaev/mnt-homeworks/08-ansible-02-playbook/png/Снимок экрана от 2024-12-02 20-33-53.png)
+  ![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/08-ansible-02-playbook/png/check.png)
   
   Запускаем site.yml --diff
   ```Bash
@@ -500,4 +500,4 @@ kuliaev@ansible2:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$
 
    ```
 
-   ![Screnshot](https://github.com/mkuliaev/virtd-homeworks/blob/shvirtd-1/05-virt-04-docker-in-practice/png/0.1.png)
+   ![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/08-ansible-02-playbook/png/diff.png)
