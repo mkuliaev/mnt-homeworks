@@ -1,4 +1,4 @@
-# Домашнее задание к занятию 2 «Работа с Playbook»
+# Домашнее задание к занятию 2 «Работа с Playbook» Mikhail Kuliaev
 
 ## Подготовка к выполнению
 
@@ -28,11 +28,12 @@
 
 ---
 
+Ставим ansible
 
  ```javascript
-kuliaev@ansible02:~$ ansible --version
+kuliaev@ansible2:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ ansible --version
 ansible [core 2.12.10]
-  config file = /etc/ansible/ansible.cfg
+  config file = /home/kuliaev/dowl/mnt-homeworks/08-ansible-02-playbook/playbook/ansible.cfg
   configured module search path = ['/home/kuliaev/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
   ansible python module location = /usr/lib/python3/dist-packages/ansible
   ansible collection location = /home/kuliaev/.ansible/collections:/usr/share/ansible/collections
@@ -41,10 +42,11 @@ ansible [core 2.12.10]
   jinja version = 2.10.1
   libyaml = True
 
-
  ```
-```Bash
-kuliaev@ansible02:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ cat Dockerfile 
+Создаём свой Dockerfile 
+
+```YML
+uliaev@ansible2:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ cat Dockerfile 
 FROM rockylinux:8
 
 RUN dnf -y update && \
@@ -55,46 +57,41 @@ RUN dnf -y update && \
 RUN alternatives --set python /usr/bin/python3.8 && \
     ln -s /usr/bin/pip3.8 /usr/bin/pip
 
+
 CMD ["sleep", "infinity"]
-
-
+ 
 
  ```
 
- ```Bash
-kuliaev@ansible02:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ cat docker-compose.yml 
----
-
+ ```YML
+kkuliaev@ansible2:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ cat docker-compose.yml 
 version: '3.8'  
-
 services:
   # Сервис для ClickHouse
   clickhouse:
     build:
-      context: . # каталог с Dockerfile
-    container_name: clickhouse-01 
+      context: . # Указывает на каталог с Dockerfile
+    container_name: clickhouse-01  
     restart: unless-stopped  
 
   # Сервис для Vector
   vector:
     build:
-      context: . # каталог с Dockerfile
+      context: . # Указывает на каталог с Dockerfile
     container_name: vector-01 
     restart: unless-stopped  
 
-
 networks:
   default:
-    name: my_network  
-
+    name: my_network 
 
 
   ```
 
-
+Запускаем docker-compose
 
  ```Bash
-kuliaev@ansible02:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ docker-compose up -d
+kuliaev@ansible2:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ docker-compose up -d
 WARN[0003] /home/kuliaev/dowl/mnt-homeworks/08-ansible-02-playbook/playbook/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion 
 [+] Building 57.0s (6/8)                                                                                               docker:default
  ⠏ Service clickhouse  Building                                                                                                 78.6s 
@@ -135,15 +132,14 @@ kuliaev@ansible02:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$
 
 
   ```
-
-
+Проверяем
 
  ```Bash
-kuliaev@ansible02:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ docker ps -a
+kuliaev@ansible2:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ docker ps -a
 CONTAINER ID   IMAGE                 COMMAND            CREATED         STATUS         PORTS     NAMES
 f85a7cb64e9c   playbook-vector       "sleep infinity"   2 minutes ago   Up 2 minutes             vector-01
 43ad659ab79e   playbook-clickhouse   "sleep infinity"   2 minutes ago   Up 2 minutes             clickhouse-01
-kuliaev@ansible02:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ 
+kuliaev@ansible2:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ 
 
 
   ```
@@ -376,8 +372,8 @@ clickhouse_packages:
   - clickhouse-common-static
 
   ```
+Ошибка сохранилась - внемателно расмотрел playbook - нашел неточности (исправил)
 Совсем забыл про vektor. 
-
 
   ```Bash
 ---
@@ -390,9 +386,33 @@ vector_config:
 
 
  ```Bash
+kuliaev@ansible02:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ ansible-playbook -i inventory/prod.yml site.yml --check
+
+PLAY [Install Clickhouse] *************************************************************************************************************************************
+
+TASK [Gathering Facts] ****************************************************************************************************************************************
+[WARNING]: Platform linux on host clickhouse-01 is using the discovered Python interpreter at /usr/bin/python3.8, but future installation of another Python
+interpreter could change the meaning of that path. See https://docs.ansible.com/ansible-core/2.12/reference_appendices/interpreter_discovery.html for more
+information.
+ok: [clickhouse-01]
+
+TASK [Get clickhouse distrib] *********************************************************************************************************************************
+changed: [clickhouse-01] => (item=clickhouse-client)
+changed: [clickhouse-01] => (item=clickhouse-server)
+changed: [clickhouse-01] => (item=clickhouse-common-static)
+
+TASK [Install clickhouse packages] ****************************************************************************************************************************
+An exception occurred during task execution. To see the full traceback, use -vvv. The error was: OSError: Could not open: ./clickhouse-common-static-24.3.12.75.rpm ./clickhouse-client-24.3.12.75.rpm ./clickhouse-server-24.3.12.75.rpm
+fatal: [clickhouse-01]: FAILED! => {"changed": false, "module_stderr": "Traceback (most recent call last):\n  File \"<stdin>\", line 16, in <module>\n  File \"/usr/lib64/python3.6/runpy.py\", line 205, in run_module\n    return _run_module_code(code, init_globals, run_name, mod_spec)\n  File \"/usr/lib64/python3.6/runpy.py\", line 96, in _run_module_code\n    mod_name, mod_spec, pkg_name, script_name)\n  File \"/usr/lib64/python3.6/runpy.py\", line 85, in _run_code\n    exec(code, run_globals)\n  File \"/tmp/ansible_ansible.legacy.dnf_payload_jd6xfhvr/ansible_ansible.legacy.dnf_payload.zip/ansible/modules/dnf.py\", line 1427, in <module>\n  File \"/tmp/ansible_ansible.legacy.dnf_payload_jd6xfhvr/ansible_ansible.legacy.dnf_payload.zip/ansible/modules/dnf.py\", line 1416, in main\n  File \"/tmp/ansible_ansible.legacy.dnf_payload_jd6xfhvr/ansible_ansible.legacy.dnf_payload.zip/ansible/modules/dnf.py\", line 1390, in run\n  File \"/tmp/ansible_ansible.legacy.dnf_payload_jd6xfhvr/ansible_ansible.legacy.dnf_payload.zip/ansible/modules/dnf.py\", line 1048, in ensure\n  File \"/tmp/ansible_ansible.legacy.dnf_payload_jd6xfhvr/ansible_ansible.legacy.dnf_payload.zip/ansible/modules/dnf.py\", line 948, in _install_remote_rpms\n  File \"/usr/lib/python3.6/site-packages/dnf/base.py\", line 1317, in add_remote_rpms\n    raise IOError(_(\"Could not open: {}\").format(' '.join(pkgs_error)))\nOSError: Could not open: ./clickhouse-common-static-24.3.12.75.rpm ./clickhouse-client-24.3.12.75.rpm ./clickhouse-server-24.3.12.75.rpm\n", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 1}
+
+PLAY RECAP ****************************************************************************************************************************************************
+clickhouse-01              : ok=2    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+
+kuliaev@ansible02:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$ 
 
 
   ```
+  
   ```Bash
 
 
