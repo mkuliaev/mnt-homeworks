@@ -2,4 +2,11 @@
 clickhouse:
   hosts:
     clickhouse-01:
-      ansible_host: <IP_here>
+      ansible_connection: docker
+#      ansible_ssh_user: kuliaev
+vector:
+  hosts:
+    vector-01:
+      ansible_connection: docker
+
+

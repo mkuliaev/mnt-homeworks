@@ -1,0 +1,21 @@
+version: '3.8'  
+
+services:
+  # Сервис для ClickHouse
+  clickhouse:
+    build:
+      context: . # Указывает на каталог с Dockerfile
+    container_name: clickhouse-01  
+    restart: unless-stopped  
+
+
+  # Сервис для Vector
+  vector:
+    build:
+      context: . # Указывает на каталог с Dockerfile
+    container_name: vector-01 
+    restart: unless-stopped  
+
+networks:
+  default:
+    name: my_network  
