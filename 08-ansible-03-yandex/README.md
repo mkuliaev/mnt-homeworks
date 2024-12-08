@@ -1,4 +1,4 @@
-# Домашнее задание к занятию 3 «Использование Ansible»
+# Домашнее задание к занятию 3 «Использование Ansible» - Mikhail Kuliaev
 
 ## Подготовка к выполнению
 
@@ -25,3 +25,7 @@
 Выполненное домашнее задание пришлите в виде ссылки на .md-файл в вашем репозитории.
 
 ---
+
+Подготовьте в Yandex Cloud три хоста: для `clickhouse`, для `vector` и для `lighthouse`
+
+  ![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/08-ansible-02-playbook/png/diff.png)
