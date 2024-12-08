@@ -1,0 +1,187 @@
+---
+- name: Install Clickhouse
+  hosts: clickhouse
+  handlers:
+    - name: Start clickhouse service
+      become: true
+      ansible.builtin.service:
+        name: clickhouse-server
+        state: restarted
+
+  tasks:
+    - name: Open ClickHouse HTTP port
+      firewalld:
+ #       port: 8123/tcp
+        rich_rule: 'rule family="ipv4" source address="0.0.0.0/0" port port="8123" protocol="tcp" accept'
+        permanent: yes
+        state: enabled		
+        immediate: yes
+#        source: 0.0.0.0/0
+      become: true
+
+    - name: Get clickhouse distrib
+      block:
+        - name: Download ClickHouse packages
+          ansible.builtin.get_url:
+            url: "https://packages.clickhouse.com/rpm/stable/{{ item }}-{{ clickhouse_version }}.x86_64.rpm"
+            dest: "./{{ item }}-{{ clickhouse_version }}.rpm"
+            mode: "0644"
+          with_items: "{{ clickhouse_packages }}"
+      rescue:
+        - name: Download fallback ClickHouse package
+          ansible.builtin.get_url:
+            url: "https://packages.clickhouse.com/rpm/stable/clickhouse-common-static-{{ clickhouse_version }}.x86_64.rpm"
+            dest: "./clickhouse-common-static-{{ clickhouse_version }}.rpm"
+            mode: "0644"
+
+    - name: Install clickhouse packages
+      become: true
+      ansible.builtin.yum:
+        name:
+          - clickhouse-common-static-{{ clickhouse_version }}.rpm
+          - clickhouse-client-{{ clickhouse_version }}.rpm
+          - clickhouse-server-{{ clickhouse_version }}.rpm
+        disable_gpg_check: true
+      notify: Start clickhouse service
+
+    - name: Flush handlers to restart clickhouse
+      ansible.builtin.meta: flush_handlers
+
+    - name: Wait for ClickHouse to start
+      wait_for:
+        port: 9000
+        delay: 10
+        timeout: 60
+        state: started
+
+    - name: Create database
+      ansible.builtin.command: "clickhouse-client -q 'create database logs;'"
+      become: true
+      register: create_db
+      failed_when: create_db.rc != 0 and create_db.rc != 82
+      changed_when: create_db.rc == 0
+
+
+- name: Install vector
+  hosts: vector
+  handlers:
+    - name: Start vector service
+      become: true
+      ansible.builtin.service:
+        name: vector
+        state: restarted    
+
+  tasks:
+    - name: Ensure vector config directory exists
+      ansible.builtin.file:
+        path: "{{ vector_config_dir }}"
+        state: directory
+        mode: "0755"
+      become: true
+
+    - name: Download vector package
+      ansible.builtin.get_url:
+        url: "https://packages.timber.io/vector/{{ vector_version }}/vector-{{ vector_version }}-1.x86_64.rpm"
+        dest: "./vector-{{ vector_version }}.rpm"
+        mode: "0644"
+      notify: Start vector service
+
+    - name: Install vector packages
+      become: true
+      ansible.builtin.yum:
+        name:
+          - vector-{{ vector_version }}.rpm
+        disable_gpg_check: true
+
+    - name: Flush handlers to restart vector
+      ansible.builtin.meta: flush_handlers
+
+    - name: Configure Vector | Template config
+      ansible.builtin.template:
+        src: "template/vector.yml.j2"
+        dest: "{{ vector_config_dir }}/vector.yml"
+        mode: "0644"
+      become: true
+- name: Install and configure Lighthouse
+  hosts: lighthouse
+  tasks:
+    - name: Ensure www-data group exists
+      group:
+        name: www-data
+        state: present
+        system: yes
+      become: yes
+
+    - name: Ensure www-data user exists
+      user:
+        name: www-data
+        group: www-data
+        system: yes
+      become: yes
+
+    - name: Download Lighthouse static files
+      get_url:
+        url: https://github.com/VKCOM/lighthouse/archive/refs/heads/master.zip
+        dest: /tmp/lighthouse.zip
+
+    - name: Ensure unzip is installed
+      apt:
+        name: unzip
+        state: present
+      become: yes
+
+    - name: Ensure /var/www/lighthouse directory exists
+      file:
+        path: /var/www/lighthouse
+        state: directory
+        owner: www-data
+        group: www-data
+        mode: '0755'
+      become: yes
+
+    - name: Unzip Lighthouse static files
+      unarchive:
+        src: /tmp/lighthouse.zip
+        dest: /var/www/lighthouse
+        remote_src: yes
+      become: yes
+
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+      become: yes
+
+    - name: Проверка существования fastcgi-php.conf
+      command: test -f /etc/nginx/snippets/fastcgi-php.conf
+      register: fastcgi_check
+      ignore_errors: yes
+      become: yes
+
+    - name: Configure Nginx
+      template:
+        src: nginx.conf.j2
+        dest: /etc/nginx/conf.d/lighthouse.conf
+      become: yes
+
+    - name: Проверка конфигурации Nginx
+      command: nginx -t
+      register: nginx_test
+      ignore_errors: yes
+      become: yes
+      when: fastcgi_check.rc == 0
+
+    - name: Перезагрузить Nginx, если конфигурация верна
+      service:
+        name: nginx
+        state: reloaded
+      when: nginx_test is defined and nginx_test.rc == 0
+      become: yes
+
+    - name: Start Nginx service
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+      become: yes
+
