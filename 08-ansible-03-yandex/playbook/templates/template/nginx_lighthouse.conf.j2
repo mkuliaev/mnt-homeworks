@@ -1,0 +1,10 @@
+server {
+    listen 80;
+    server_name {{ nginx_server_name }};
+
+    location / {
+        root {{ lighthouse_root }};  # Путь к статическим файлам LightHouse
+        index index.html index.htm;
+        try_files $uri $uri/ =404;
+    }
+}
