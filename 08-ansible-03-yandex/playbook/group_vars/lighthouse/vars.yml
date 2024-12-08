@@ -1,0 +1,5 @@
+---
+lighthouse_vcs: http://github.com/VKCOM/lighthouse.git
+lighthouse_location_dir: /tmp/lighthouse
+lighthouse_access_log_name: access
+nginx_user_name: kuliaev
