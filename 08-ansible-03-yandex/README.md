@@ -28,4 +28,122 @@
 
 Подготовьте в Yandex Cloud три хоста: для `clickhouse`, для `vector` и для `lighthouse`
 
-  ![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/08-ansible-02-playbook/png/diff.png)
+  ![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/08-ansible-03-yandex/png/yandex_vm.png)
+
+
+Подготовка inventory-файла 
+
+ ```YML
+---
+clickhouse:
+  hosts:
+    clickhouse-01: 
+      ansible_host: 10.129.0.20
+      ansible_user: kuliaev
+vector:
+  hosts:
+    vector-01:
+      ansible_host: 10.129.0.9
+      ansible_user: kuliaev
+
+lighthouse:
+  hosts:
+    lighthouse:
+      ansible_host: 10.129.0.8
+      ansible_user: kuliaev
+
+ ```
+Дополнение playbook для установки LightHouse
+
+  ```YML
+- name: Install and configure Lighthouse
+  hosts: lighthouse
+  tasks:
+    - name: Ensure www-data group exists
+      group:
+        name: www-data
+        state: present
+        system: yes
+      become: yes
+
+    - name: Ensure www-data user exists
+      user:
+        name: www-data
+        group: www-data
+        system: yes
+      become: yes
+
+    - name: Download Lighthouse static files
+      get_url:
+        url: https://github.com/VKCOM/lighthouse/archive/refs/heads/master.zip
+        dest: /tmp/lighthouse.zip
+
+    - name: Ensure unzip is installed
+      apt:
+        name: unzip
+        state: present
+      become: yes
+
+    - name: Ensure /var/www/lighthouse directory exists
+      file:
+        path: /var/www/lighthouse
+        state: directory
+        owner: www-data
+        group: www-data
+        mode: '0755'
+      become: yes
+
+    - name: Unzip Lighthouse static files
+      unarchive:
+        src: /tmp/lighthouse.zip
+        dest: /var/www/lighthouse
+        remote_src: yes
+      become: yes
+
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+      become: yes
+
+    - name: Проверка существования fastcgi-php.conf
+      command: test -f /etc/nginx/snippets/fastcgi-php.conf
+      register: fastcgi_check
+      ignore_errors: yes
+      become: yes
+
+    - name: Configure Nginx
+      template:
+        src: nginx.conf.j2
+        dest: /etc/nginx/conf.d/lighthouse.conf
+      become: yes
+
+    - name: Проверка конфигурации Nginx
+      command: nginx -t
+      register: nginx_test
+      ignore_errors: yes
+      become: yes
+      when: fastcgi_check.rc == 0
+
+    - name: Перезагрузить Nginx, если конфигурация верна
+      service:
+        name: nginx
+        state: reloaded
+      when: nginx_test is defined and nginx_test.rc == 0
+      become: yes
+
+    - name: Start Nginx service
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+      become: yes
+
+
+
+    ```
+
+Создание шаблона конфигурации Nginx
+
+
+
