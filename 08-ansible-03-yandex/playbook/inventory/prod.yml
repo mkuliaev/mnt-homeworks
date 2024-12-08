@@ -1,12 +1,17 @@
 ---
 clickhouse:
   hosts:
-    clickhouse-01:
-      ansible_connection: docker
-#      ansible_ssh_user: kuliaev
+    clickhouse-01: 
+      ansible_host: 10.129.0.20
+      ansible_user: kuliaev
 vector:
   hosts:
     vector-01:
-      ansible_connection: docker
+      ansible_host: 10.129.0.9
+      ansible_user: kuliaev
 
-
+lighthouse:
+  hosts:
+    lighthouse:
+      ansible_host: 10.129.0.8
+      ansible_user: kuliaev
