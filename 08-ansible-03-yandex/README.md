@@ -147,8 +147,8 @@ lighthouse:
 
 
 
-  ```INI
-  
+  ```Bash
+
 server {
     listen 80;
     server_name 51.250.97.96;
