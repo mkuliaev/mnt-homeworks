@@ -538,12 +538,10 @@ kuliaev@ansible2:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$
 
 
   ![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/08-ansible-03-yandex/png/--check_1.png)
-
   ![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/08-ansible-03-yandex/png/---chekk.png)
 
 
 
 
   ![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/08-ansible-03-yandex/png/--diff_1.png)
-
   ![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/08-ansible-03-yandex/png/--diff.png)
