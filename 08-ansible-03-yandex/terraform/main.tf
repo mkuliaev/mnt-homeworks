@@ -6,7 +6,7 @@ provider "yandex" {
 
 resource "yandex_compute_instance" "clickhouse" {
   name         = "clickhouse-01"
-  zone         = "ru-central1-a"
+  zone         = "ru-central1-b"
   platform_id  = "standard-v1"
   resources {
     cores  = 2
@@ -27,7 +27,7 @@ resource "yandex_compute_instance" "clickhouse" {
 
 resource "yandex_compute_instance" "vector" {
   name         = "vector-01"
-  zone         = "ru-central1-a"
+  zone         = "ru-central1-b"
   platform_id  = "standard-v1"
   resources {
     cores  = 2
@@ -48,7 +48,7 @@ resource "yandex_compute_instance" "vector" {
 
 resource "yandex_compute_instance" "lighthouse" {
   name         = "lighthouse"
-  zone         = "ru-central1-a"
+  zone         = "ru-central1-b"
   platform_id  = "standard-v1"
   resources {
     cores  = 2
