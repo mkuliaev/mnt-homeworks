@@ -531,6 +531,10 @@ kuliaev@ansible2:~/dowl/mnt-homeworks/08-ansible-02-playbook/playbook$
 - `lighthouse`: Установка и настройка LightHouse.
 
 
+
+
+
+
   ![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/08-ansible-03-yandex/png/lighhous.png)
 
 
