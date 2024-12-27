@@ -54,6 +54,9 @@
 
 Если всё отработалось в рамках ожидания — выгрузите схемы workflow для импорта в XML. Файлы с workflow и скриншоты workflow приложите к решению задания.
 
+[BUG](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-01-intro/fails/Software_Simplified_Workflow_for_Project_BUG.xml)
+[SCRAM](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-01-intro/fails/Software_Simplified_Workflow_for_Project_SCRUM.xml)  
+
 ---
 
 ### Как оформить решение задания
