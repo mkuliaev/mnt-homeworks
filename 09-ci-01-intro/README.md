@@ -36,11 +36,12 @@
 **Что нужно сделать**
 
 Создайте задачу с типом bug, попытайтесь провести его по всему workflow до Done.
-![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-01-intro/PNG/workflow_bug.png)
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-01-intro/PNG/bug_3.png)
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-01-intro/PNG/2024-12-27_14-58-47.png)
 
 
 Создайте задачу с типом epic, к ней привяжите несколько задач с типом task, проведите их по всему workflow до Done.
-![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-01-intro/PNG/workflow_bug.png)
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-01-intro/PNG/epic.png)
 
 
 При проведении обеих задач по статусам используйте kanban.![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-01-intro/PNG/workflow_bug.png)
@@ -48,7 +49,9 @@
 
 Верните задачи в статус Open.
 Перейдите в Scrum, запланируйте новый спринт, состоящий из задач эпика и одного бага, стартуйте спринт, проведите задачи до состояния Closed. Закройте спринт.
-![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-01-intro/PNG/workflow_bug.png)
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-01-intro/PNG/on_final.png)
+![Screnshot](hhttps://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-01-intro/PNG/final.png)
+
 
 Если всё отработалось в рамках ожидания — выгрузите схемы workflow для импорта в XML. Файлы с workflow и скриншоты workflow приложите к решению задания.
 
