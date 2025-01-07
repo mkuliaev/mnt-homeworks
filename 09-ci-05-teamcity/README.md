@@ -9,6 +9,11 @@
 5. Сделайте fork [репозитория](https://github.com/aragastmatb/example-teamcity).
 6. Создайте VM (2CPU4RAM) и запустите [playbook](./infrastructure).
 
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/08-ansible-03-yandex/png/yandex_vm.png)
+
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/08-ansible-03-yandex/png/yandex_vm.png)
+
+
 ## Основная часть
 
 1. Создайте новый проект в teamcity на основе fork.
