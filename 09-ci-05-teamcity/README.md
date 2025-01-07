@@ -29,6 +29,9 @@
 6. В pom.xml необходимо поменять ссылки на репозиторий и nexus.
 ![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-05-teamcity/png/2025-01-08_06-30-24.png)
 7. Запустите сборку по master, убедитесь, что всё прошло успешно и артефакт появился в nexus.
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-05-teamcity/png/2025-01-08_08-26-57.png)
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-05-teamcity/png/2025-01-08_08-28-36.png)
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-05-teamcity/png/2025-01-08_08-57-38.png)
 8. Мигрируйте `build configuration` в репозиторий.
 9. Создайте отдельную ветку `feature/add_reply` в репозитории.
 10. Напишите новый метод для класса Welcomer: метод должен возвращать произвольную реплику, содержащую слово `hunter`.
