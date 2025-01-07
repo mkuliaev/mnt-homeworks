@@ -9,29 +9,16 @@
 5. Сделайте fork [репозитория](https://github.com/aragastmatb/example-teamcity).
 6. Создайте VM (2CPU4RAM) и запустите [playbook](./infrastructure).
 
-![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-05-teamcity/png/2025-01-08_03-10-53.png)
-
-![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-05-teamcity/png/2025-01-08_04-31-43.png)
-
 
 ## Основная часть
 
 1. Создайте новый проект в teamcity на основе fork.
 2. Сделайте autodetect конфигурации.
-![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-05-teamcity/png/2025-01-08_04-44-11.png)
-![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-05-teamcity/png/2025-01-08_04-51-06.png)
-
-
 3. Сохраните необходимые шаги, запустите первую сборку master.
 4. Поменяйте условия сборки: если сборка по ветке `master`, то должен происходит `mvn clean deploy`, иначе `mvn clean test`.
 5. Для deploy будет необходимо загрузить [settings.xml](./teamcity/settings.xml) в набор конфигураций maven у teamcity, предварительно записав туда креды для подключения к nexus.
-![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-05-teamcity/png/2025-01-08_10-08-48.png)
 6. В pom.xml необходимо поменять ссылки на репозиторий и nexus.
-![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-05-teamcity/png/2025-01-08_06-30-24.png)
 7. Запустите сборку по master, убедитесь, что всё прошло успешно и артефакт появился в nexus.
-![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-05-teamcity/png/2025-01-08_08-26-57.png)
-![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-05-teamcity/png/2025-01-08_08-28-36.png)
-![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-05-teamcity/png/2025-01-08_08-57-38.png)
 8. Мигрируйте `build configuration` в репозиторий.
 9. Создайте отдельную ветку `feature/add_reply` в репозитории.
 10. Напишите новый метод для класса Welcomer: метод должен возвращать произвольную реплику, содержащую слово `hunter`.
@@ -47,9 +34,15 @@
 
 ---
 
-### Как оформить решение задания
-
-Выполненное домашнее задание пришлите в виде ссылки на .md-файл в вашем репозитории.
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-05-teamcity/png/2025-01-08_03-10-53.png)
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-05-teamcity/png/2025-01-08_04-31-43.png)
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-05-teamcity/png/2025-01-08_04-44-11.png)
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-05-teamcity/png/2025-01-08_04-51-06.png)
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-05-teamcity/png/2025-01-08_10-08-48.png)
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-05-teamcity/png/2025-01-08_06-30-24.png)
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-05-teamcity/png/2025-01-08_08-26-57.png)
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-05-teamcity/png/2025-01-08_08-28-36.png)
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/09-ci-05-teamcity/png/2025-01-08_08-57-38.png)
 
 ---
  
