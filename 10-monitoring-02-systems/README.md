@@ -83,11 +83,11 @@ TICK в Docker )) можно использован для сбора и виз�
     - Nagios
 
 ```
-Prometheus: Pull
-TICK: Push
-Zabbix: Гибридная (поддерживает оба подхода)
+Prometheus:      Pull
+TICK:            Push
+Zabbix:          Гибридная (поддерживает оба подхода)
 VictoriaMetrics: Pull
-Nagios: Pull
+Nagios:          Pull
 
 
  ```
