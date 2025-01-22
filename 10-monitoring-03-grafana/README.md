@@ -10,7 +10,8 @@
 1. Подключите поднятый вами prometheus, как источник данных.
 1. Решение домашнего задания — скриншот веб-интерфейса grafana со списком подключенных Datasource.
 
-![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/10-monitoring-02-systems/2025-01-17__21-15-21.png)
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/10-monitoring-03-grafana/png/1.png)
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/10-monitoring-03-grafana/png/2.png)
 
 ## Задание 2
 
@@ -28,21 +29,23 @@
 - количество места на файловой системе.
 
 Для решения этого задания приведите promql-запросы для выдачи этих метрик, а также скриншот получившейся Dashboard.
-![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/10-monitoring-02-systems/2025-01-17__21-15-21.png)
-![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/10-monitoring-02-systems/2025-01-17__21-15-21.png)
-![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/10-monitoring-02-systems/2025-01-17__21-15-21.png)
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/10-monitoring-03-grafana/png/3.png)
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/10-monitoring-03-grafana/png/4.png)
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/10-monitoring-03-grafana/png/5.png)
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/10-monitoring-03-grafana/png/6.png)
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/10-monitoring-03-grafana/png/7.png)
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/10-monitoring-03-grafana/png/8.png)
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/10-monitoring-03-grafana/png/9.png)
 
 ## Задание 3
 
 1. Создайте для каждой Dashboard подходящее правило alert — можно обратиться к первой лекции в блоке «Мониторинг».
 1. В качестве решения задания приведите скриншот вашей итоговой Dashboard.
-![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/10-monitoring-02-systems/2025-01-17__21-15-21.png)
-![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/10-monitoring-02-systems/2025-01-17__21-15-21.png)
-## Задание 4
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/10-monitoring-03-grafana/png/010.png)
 
 1. Сохраните ваш Dashboard.Для этого перейдите в настройки Dashboard, выберите в боковом меню «JSON MODEL». Далее скопируйте отображаемое json-содержимое в отдельный файл и сохраните его.
 1. В качестве решения задания приведите листинг этого файла.
-![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/10-monitoring-02-systems/2025-01-17__21-15-21.png)
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/10-monitoring-03-grafana/png/011.png)
 ```JSON
 {
   "annotations": {
