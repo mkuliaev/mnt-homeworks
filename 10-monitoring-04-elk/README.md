@@ -54,10 +54,9 @@ Filebeat следует сконфигурировать для отправки
 Эти логи должны порождать индекс logstash-* в elasticsearch. Если этого индекса нет — воспользуйтесь советами и источниками из раздела «Дополнительные ссылки» этого задания.
  
 ---
-![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/10-monitoring-03-grafana/png/9.png)
-![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/10-monitoring-03-grafana/png/9.png)
-![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/10-monitoring-03-grafana/png/9.png)
-![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/10-monitoring-03-grafana/png/9.png)
-![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/10-monitoring-03-grafana/png/9.png)
-![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/10-monitoring-03-grafana/png/9.png)
-![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/10-monitoring-03-grafana/png/9.png)
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/10-monitoring-04-elk/png/elk_1.png)
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/10-monitoring-04-elk/png/elk-1-1.png)
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/10-monitoring-04-elk/png/elk-2.png)
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/10-monitoring-04-elk/png/elk-2-1.png)
+![Screnshot](https://github.com/mkuliaev/mnt-homeworks/blob/MNT-video/10-monitoring-04-elk/png/elk-3.png)
+
